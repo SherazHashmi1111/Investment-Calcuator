@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import FromCalculator from "./components/FromCalculator";
+import Results from "./components/Results";
+import ErrorModal from "./components/ErrorModal";
 
 function App() {
+  const [userInput, setUserInput] = useState();
+  const investmentDataHandler = (data) => {
+    setUserInput(data);
+  };
+
+  const yearlyData = [];
+  if (userInput) {
+    let currentSavings = userInput.currentSavings;
+    const yearlyContribution = userInput.yearlyContribution;
+    const expectedReturn = userInput.expectedReturn;
+    const duration = userInput.duration;
+    for (let i = 0; i < duration; i++) {
+      const yearlyInterest = (currentSavings * expectedReturn) / 100;
+      currentSavings += yearlyInterest + yearlyContribution;
+      yearlyData.push({
+        year: i+1,
+        yearlyInterest,
+        savingEndOfYear: currentSavings,
+        yearlyContribution
+      })
+    }
+  } 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <ErrorModal/> */}
+      <Header />
+      <FromCalculator investmentData={investmentDataHandler} />
+      <Results data={yearlyData}/>
+    </>
   );
 }
 
