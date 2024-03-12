@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import FromCalculator from "./components/FromCalculator";
 import Results from "./components/Results";
-import ErrorModal from "./components/ErrorModal";
 
 function App() {
   const [userInput, setUserInput] = useState();

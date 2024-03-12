@@ -17,3 +17,19 @@
     font-size: 1.2rem;
     color: #c2e9e0;
   }
+
+  @media (max-width: 480px) {
+    .result {
+      max-width: 90%;
+      margin: 1rem auto;
+      padding: .5rem;
+      border-spacing: 1rem;
+    }
+    .result thead {
+      font-size: 1rem;
+    }
+    
+    .result tbody {
+      font-size: 1rem;
+    }
+}
